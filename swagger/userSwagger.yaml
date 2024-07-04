@@ -1,0 +1,159 @@
+openapi: 3.0.0
+info:
+  title: User API
+  description: API for managing users and their preferences
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:3000
+
+tags:
+  - name: User
+    description: Operations related to users
+
+paths:
+  /users:
+    post:
+      tags:
+        - User
+      summary: Add a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewUser'
+      responses:
+        '200':
+          description: User added successfully
+          content:
+            application/json:
+              schema:
+                type: integer
+                example: 1
+        '400':
+          description: Bad Request
+
+  /users/{userId}:
+    get:
+      tags:
+        - User
+      summary: Get user information
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: integer
+          description: ID of the user
+      responses:
+        '200':
+          description: User information retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '404':
+          description: User not found
+
+  /users/{userId}/preferences:
+    post:
+      tags:
+        - User
+      summary: Set user food preferences
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: integer
+          description: ID of the user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Preference'
+      responses:
+        '200':
+          description: Preferences set successfully
+        '400':
+          description: Bad Request
+    get:
+      tags:
+        - User
+      summary: Get user food preferences
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: integer
+          description: ID of the user
+      responses:
+        '200':
+          description: Preferences retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Preference'
+        '404':
+          description: Preferences not found
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        email:
+          type: string
+        name:
+          type: string
+        gender:
+          type: string
+        birth:
+          type: string
+          format: date
+        addr:
+          type: string
+        specAddr:
+          type: string
+        phone:
+          type: string
+    NewUser:
+      type: object
+      properties:
+        email:
+          type: string
+          example: user@example.com
+        name:
+          type: string
+          example: John Doe
+        gender:
+          type: string
+          example: Male
+        birth:
+          type: string
+          format: date
+          example: 1990-01-01
+        addr:
+          type: string
+          example: "123 Main St"
+        specAddr:
+          type: string
+          example: "Apt 4B"
+        phone:
+          type: string
+          example: "123-456-7890"
+    Preference:
+      type: object
+      properties:
+        categoryId:
+          type: integer
+          example: 5
+        categoryName:
+          type: string
