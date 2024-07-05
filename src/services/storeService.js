@@ -1,7 +1,7 @@
 import {BaseError} from '../../config/error.js';
 import {status} from '../../config/response.status.js';
 import {addReviewDTO, addStoreResDTO} from '../dtos/storeDTO.js';
-import {addNewStore, addReviewToDB} from '../models/storeDao.js';
+import {addReviewToDB, addStore} from '../models/storeDao.js';
 
 // 가게 등록
 export const addStoreToDB = async (body) => {
@@ -10,7 +10,7 @@ export const addStoreToDB = async (body) => {
 
     // 새 가게 추가
     const joinNewStoreData =
-        await addNewStore({regionId, name, address, starRating});
+        await addStore({regionId, name, address, starRating});
 
     if (joinNewStoreData === -1) {
       throw new BaseError(
