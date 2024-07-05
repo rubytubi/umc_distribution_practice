@@ -1,13 +1,13 @@
 import express from 'express';
 import SwaggerUi from 'swagger-ui-express';
 
-import {BaseError} from './config/error';
-import {response} from './config/response';
-import {status} from './config/response.status';
+import {BaseError} from './config/error.js';
+import {response} from './config/response.js';
+import {status} from './config/response.status.js';
 import {specs} from './config/swagger.config.js';
 import {healthRoute} from './src/routes/healthRoute.js';
 import {storeRouter} from './src/routes/storeRoute.js';
-import {tempRouter} from './src/routes/tempRoute';
+import {tempRouter} from './src/routes/tempRoute.js';
 import {userRouter} from './src/routes/userRoute.js';
 
 const app = express();
