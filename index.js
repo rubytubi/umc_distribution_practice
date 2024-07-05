@@ -5,6 +5,7 @@ import {BaseError} from './config/error';
 import {response} from './config/response';
 import {status} from './config/response.status';
 import {specs} from './config/swagger.config.js';
+import {healthRoute} from './src/routes/healthRoute.js';
 import {storeRouter} from './src/routes/storeRoute.js';
 import {tempRouter} from './src/routes/tempRoute';
 import {userRouter} from './src/routes/userRoute.js';
@@ -22,6 +23,11 @@ app.use('/api-docs', SwaggerUi.serve, SwaggerUi.setup(specs));
 app.use('/temp', tempRouter);
 app.use('/user', userRouter);
 app.use('/store', storeRouter);
+app.use('/health', healthRoute);
+
+app.get('/', (req, res, next) => {
+  res.send(response(status.SUCCESS, '루트 페이지!'));
+})
 
 // 404 오류를 잡아서 에러 핸들러로 전달
 app.use((req, res, next) => {
