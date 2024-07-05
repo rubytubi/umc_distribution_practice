@@ -1,7 +1,7 @@
-import {BaseError} from '../../config/error';
-import {status} from '../../config/response.status';
-import {addReviewDTO, addStoreResDTO} from '../dtos/storeDTO';
-import {addNewStore, addReviewToDB} from '../models/storeDao';
+import {BaseError} from '../../config/error.js';
+import {status} from '../../config/response.status.js';
+import {addReviewDTO, addStoreResDTO} from '../dtos/storeDTO.js';
+import {addNewStore, addReviewToDB} from '../models/storeDao.js';
 
 // 가게 등록
 export const addStoreToDB = async (body) => {

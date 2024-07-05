@@ -1,7 +1,7 @@
-import {BaseError} from '../../config/error';
-import {status} from '../../config/response.status';
-import {missionResDTO} from '../dtos/missionDTO'
-import {addMissionDB} from '../models/missionDao';
+import {BaseError} from '../../config/error.js';
+import {status} from '../../config/response.status.js';
+import {missionResDTO} from '../dtos/missionDTO.js'
+import {addMissionDB} from '../models/missionDao.js';
 
 export const addMission = async (body) => {
   const newMission = await addMissionDB(
